@@ -1,0 +1,17 @@
+<% if @user != nil %>
+  <% err_var = @user %>
+<% elsif @post != nil %>
+  <% err_var = @post %>
+<% end %>
+
+<% if err_var.errors.any? %>
+  <p>You done fucked up <%= pluralize(err_var.errors.count, "time") %>
+
+  <ul>
+  <% err_var.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+
+<% end %>
+

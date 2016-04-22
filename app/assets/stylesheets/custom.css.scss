@@ -1,0 +1,32 @@
+@import "foundation";
+
+.backdrop {
+  background: #661515;
+  background: linear-gradient(#661515, #7E1515, #661515);
+}
+
+.panel-post {
+  @extend .panel;
+  background-color: white-smoke;
+  color: #000000;
+}
+
+.panel-center {
+  @extend .panel;
+  background-color: #BBBBBB;
+}
+
+.ui-resizable-s {
+  background-color: #777777;
+}
+
+.post-title-link {
+  a {
+    color: black;
+  }
+}
+
+
+
+
+

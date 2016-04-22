@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ?  yield(:title) + " | Madness Catalog"  : "Catalog of a Man's Steady Descent into Madness" %></title>
+    
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+
+  </head>
+
+  <body class="backdrop">
+    <div class="row">
+      <% flash.each do |message_type, message| %>
+        <div class="alert-box <%= message_type %> "><%= message %> </div>
+      <% end %>
+    </div>
+
+    <div class="row small-11 large-12">
+      <%= render 'layouts/header' %>
+    </div>
+
+      <%= yield %>
+ 
+  </body>
+</html>

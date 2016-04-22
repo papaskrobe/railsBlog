@@ -1,0 +1,22 @@
+<% provide(:title, @post.title) %>
+
+<div class="row small-11 large-12 panel-center">
+  <%= render '/posts/post' %>
+</div>
+
+<div class="row small-11 large-12 panel">
+  <div class="row small-6 large-6 columns">
+    <% prev_and_next_posts = prev_and_next(@post.id.to_i) %>
+    <% if prev_and_next_posts[:prevtitle] != nil then  %>
+      <%= link_to("Previous: " + prev_and_next_posts[:prevtitle], prev_and_next_posts[:prevurl]) %>
+    <% end %>
+  </div>
+
+  <div class="row small-5 large-6 columns">
+    <% prev_and_next_posts = prev_and_next(@post.id.to_i) %>
+    <% if prev_and_next_posts[:nexttitle] != nil then  %>
+      <%= link_to("Next: " + prev_and_next_posts[:nexttitle], prev_and_next_posts[:nexturl]) %>
+    <% end %>
+  </div>
+
+</div>

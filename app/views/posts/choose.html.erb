@@ -1,0 +1,36 @@
+
+<div class="row panel-center">
+<div class="panel-post">
+
+<div class="row">
+  <div class="large-6 small-8 columns">
+    <%= label nil, :posted %>
+    <%= select_tag(:posted, options_for_select(list_posted)) %>
+  </div>
+  <div class="large-4 small-4 large-uncentered columns">
+    <%= label nil, "." %>
+    <span class="small button" onClick="editLink('posted')">Edit</span>
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="large-6 small-8 columns">
+    <%= label nil, :unposted %>
+    <%= select_tag(:unposted, options_for_select(list_unposted)) %>
+  </div>
+  <div class="large-4 small-4 large-uncentered columns">
+    <%= label nil, "." %>
+    <span class="small button" onclick="editLink('unposted')">Edit</span>
+  </div>
+</div>
+
+<%= javascript_tag do %>
+  function editLink(which_list) {
+    self.location = "<%= edit_url %>/" + document.getElementById(which_list).value;
+  }
+<% end %>
+
+</div>
+</div>

@@ -1,0 +1,57 @@
+<div class="row panel-content">
+<div class="panel-post">
+
+<%= form_for(@post) do |f| %>
+  <%= render 'shared/error_messages' %>
+  <div class="row">
+    <div class="large-4 small-8 columns">
+      <%= f.label :title %>
+      <%= f.text_field :title, :oninput => "makeURL(url_text)", :value => @post.title %>
+    </div>
+    <div class="large-2 small-4 columns end">
+      <label for="url_length">Length</label>
+      <input type="number" id="url_length" oninput="makeURL(url_text)" min="5" max="50" value="25">
+    </div>
+  </div>
+
+<div class="row">
+  <div class="large-6 columns">
+
+      <%= f.label :url, "URL" %>
+      <%= f.text_field :url, :id => "url_text", :value => @post.url %>
+
+  </div>
+</div>
+  
+<div class="row">
+  <div class="large-10 columns panel" style="background-color:#FCFCFC;">
+    <%= quill_editor nil, {id: 'content_final', name: 'post[content_final]', rows: '25', value: @post.content_final }  %>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="large-2 small-4 columns">
+    <%= f.submit "Save", class: "small button", name: "save" %>
+  </div>
+  <div class="large-2 small-4 columns">
+    <span class="small button" onclick="changeText(content_preview)">Preview</span>
+  </div>
+  <div class="large-2 small-4 end columns">
+    <%= f.submit "Publish", class: "small button" %>
+  </div>
+</div>
+
+<% end %>    
+
+
+<hr>
+
+<div class="row">
+  <div class="large-10 small-12 columns">
+    <p id="content_preview"></p>
+  </div>
+</div>
+
+</div>
+</div>

@@ -1,0 +1,24 @@
+<div class="row small-11 large-12 panel-center">
+
+<% @page_posts.compact.each do |x| %>
+  <% @post =  x %>
+  <%= render 'posts/post' %>
+<% end %>
+
+</div>
+
+
+
+<div class="row small-11 large-12 panel">
+  <div class="small-6 columns">
+    <% if @prev_page %>
+      <%= link_to "Previous page", controller: "posts", action: "page", id: params[:id].to_i - 1  %>  
+    <% end %>
+  </div>
+
+  <div class="small-5 columns" align="right">
+    <% if @next_page %>
+      <%= link_to "Next page", controller: "posts", action: "page", id: params[:id].to_i + 1 %>
+    <% end %>
+  </div>
+</div>

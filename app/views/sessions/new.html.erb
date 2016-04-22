@@ -1,0 +1,28 @@
+<% provide(:title, "Log in") %>
+
+<div class="row small-11 large-12 panel-center">
+
+  <div class="large-12 columns panel-post">
+
+  <div class="large-6 small-12 large-centered columns">
+  
+    <h1>Log in</h1>
+    <%= form_for(:session, url: login_path) do |f| %>
+      
+      <%= f.label :username %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control' %>
+
+      <%= f.label :remember_me, class: "checkbox inline" do %>
+        <%= f.check_box :remember_me %>
+        <span>Remember me on this computer</span>
+      <% end %>
+
+      <%= f.submit "Log in", class: "button" %>
+    <% end %>
+  </div>
+  </div>
+
+</div>

@@ -1,0 +1,32 @@
+<nav class="top-bar" data-topbar>
+  <ul class="title-area">
+    <li class="name">
+      <h3 class="show-for-small-only">
+        <%= link_to "Madness Catalog", root_path %>
+      </h3>
+      <h3 class="show-for-medium-up"> 
+      <%= link_to "Catalog of a Man's Steady Descent into Madness", root_path %>
+      </h3>
+    </li>
+  </ul>
+  <section class="top-bar-section">
+    <ul class="right">
+      <li class="has-dropdown not-click">
+      <% if logged_in? %>
+        <a><%= @current_user.name %></a>
+        <ul class="dropdown">
+          <li><%= link_to "User page", current_user %>
+          <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+        </ul>
+      <% else %>
+        <%= link_to "Log in", login_path %>
+        <ul class="dropdown">
+          <li><%= link_to "Sign up", signup_path %></li>
+        </ul>
+      <% end %>
+        <ul class="dropdown">
+          <li></li>
+        </ul>
+      </li>     
+    </ul>
+</nav>

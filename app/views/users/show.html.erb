@@ -1,0 +1,21 @@
+<% provide(:title, @user.name) %>
+
+
+<div class=row small-11 large-12 panel-center">
+  <div class="small-11 small-centered large-12 columns panel-post">
+    <h1><%= @user.name %></h1>
+
+<% if current_user && current_user.status_admin? %>
+  <%= form_for(@user) do |f| %>
+    <%= f.label :moderator %>
+    <%= f.check_box :status_moderator %>
+
+
+
+  <% end %>
+<% end %>
+
+
+  </div>
+
+</div>

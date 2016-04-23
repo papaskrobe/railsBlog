@@ -5,16 +5,39 @@
   <div class="small-11 small-centered large-12 columns panel-post">
     <h1><%= @user.name %></h1>
 
-<% if current_user && current_user.status_admin? %>
+
+
   <%= form_for(@user) do |f| %>
+
+<% if current_user && current_user.status_admin? %>
+
     <%= f.label :moderator %>
-    <%= f.check_box :status_moderator %>
+    <%= f.check_box :status_moderator %><p>
+    
 
+    <%= f.label :writer %>
+    <%= f.check_box :status_writer %><p>
 
-
-  <% end %>
 <% end %>
 
+<% if current_user && (current_user.status_admin? || current_user.status_moderator?) %>
+
+    <%= f.label :commentor %>
+    <%= f.check_box :status_commentor  %><p>
+<% end %>
+
+<% if (current_user ==  @user) || (current_user && (current_user.status_admin? || current_user.status_moderator?)) %>
+    <%= f.label :signature %>
+    <%= f.text_area :signature, size: "20x4", resize: "none" %>
+
+<% else %>
+    <%= @user.signature %>
+
+<% end %>
+
+    <%= f.submit "Save changes", class: "small button" %>
+
+  <% end %>
 
   </div>
 

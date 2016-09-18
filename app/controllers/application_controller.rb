@@ -23,4 +23,8 @@ class ApplicationController < ActionController::Base
       redirect_to(root_url) unless current_user.status_admin?
     end
 
+    def writer_user
+      redirect_to(root_url) unless current_user.status_writer?
+    end
+
 end

@@ -1,0 +1,7 @@
+<ul>
+  
+  <li><%= @comment.user ? @comment.user.name : "anonymous"  %></li>
+  <li><%= link_to(@comment.created_at.strftime("%b %-d, %Y %H:%M:%S"), "/posts/" + @comment.to_post.to_s + "#comment-" + @comment.id.to_s) %></li>
+  <li><%= @comment.content %></li>
+
+</ul>

@@ -7,12 +7,16 @@
 
   <div class="row">
     <p>Posted on: <%= @post.posted.strftime("%m/%d/%Y") %>
-    <% if @post.updated_at.strftime("%Y/%m/%d") > @post.posted.strftime("%Y/%m/%d") %>
-    <br><em>Updated on: <%= @post.updated_at.strftime("%m/%d/%Y") %></em>
+
+  <% user = current_user %>
+  <% if user && (user.status_admin || user.status_writer) %> 
+   <br><%= link_to "Edit post", edit_url + "/" + @post.id.to_s %>
+
   <% end %>
+
   </div>
 
   <div class="row">
-    <%=raw @post.content_final %>
+    <%=raw process_post(@post.content_final) %>
   </div>
 </div>

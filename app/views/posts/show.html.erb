@@ -4,19 +4,46 @@
   <%= render '/posts/post' %>
 </div>
 
-<div class="row small-11 large-12 panel">
+<div class="row small-11 large-12 small-uncolapse panel">
   <div class="row small-6 large-6 columns">
     <% prev_and_next_posts = prev_and_next(@post.id.to_i) %>
     <% if prev_and_next_posts[:prevtitle] != nil then  %>
-      <%= link_to("Previous: " + prev_and_next_posts[:prevtitle], prev_and_next_posts[:prevurl]) %>
+      <%= link_to("Previous: " + prev_and_next_posts[:prevtitle], "/posts/" + prev_and_next_posts[:prevurl]) %>
     <% end %>
   </div>
 
   <div class="row small-5 large-6 columns">
     <% prev_and_next_posts = prev_and_next(@post.id.to_i) %>
     <% if prev_and_next_posts[:nexttitle] != nil then  %>
-      <%= link_to("Next: " + prev_and_next_posts[:nexttitle], prev_and_next_posts[:nexturl]) %>
+      <%= link_to("Next: " + prev_and_next_posts[:nexttitle], "/posts/" + prev_and_next_posts[:nexturl]) %>
+
+
     <% end %>
   </div>
+
+</div>
+
+<div class="row small-11 large-12 panel">
+
+<% if @post.guest_comment == true || (current_user && comments_on == true)  %>
+  <%= form_for(@comment) do |f| %>
+    <%= f.label :comment %>
+    <%= f.text_area :content %>
+
+    <%= f.submit "Submit", class: "small button" %>
+  <% end %>
+<% end %>
+
+  <% print_comments(Comment.where(to_post: @post.id.to_i), 0, nil) do |comment, indent| %>
+    <% @comment = comment %>
+    <% indent = 5 unless indent < 5 %> 
+    <div class="small-1 columns"></div>
+      <div class="small-<%= 12 - indent %> small-offset-<%= indent %> columns">
+      <div class="panel-comment" id="comment-<%= @comment.id %>">
+        <%= render 'comments/comment' %>
+      <div align="right">Reply</div>
+      </div>
+    </div>
+  <% end %>
 
 </div>

@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
   before_action :logged_in_user, only: :new
-  before_action :admin_user, only: :new
+  before_action :writer_user, only: :new
 
   def index
     redirect_to root_url
@@ -10,8 +10,10 @@ class PostsController < ApplicationController
   def show
     if Post.find_by(url: params[:id]) then 
       @post = Post.find_by(url: params[:id])
-    elsif Post.find_by(id: params[:id])
-      redirect_to ("/posts/" + Post.find(params[:id]).url)
+      @comment = Comment.new(to_post: @post.id)
+    elsif @post = Post.find_by(id: params[:id])
+      redirect_to ("/posts/" + @post.url)
+      @comment = Comment.new(to_post: @post.id)
     else
       render file: "/public/404.html"   
     end
@@ -41,10 +43,14 @@ class PostsController < ApplicationController
   end
 
   def edit
-    if !Post.find_by(id: params[:id])  then
-      render 'choose'
+    if current_user && (current_user.status_writer? || current_user.status_admin?) then 
+      if !Post.find_by(id: params[:id])  then
+        render 'choose'
+      else
+        @post = Post.find(params[:id])
+      end
     else
-      @post = Post.find(params[:id])
+     redirect_to root_url 
     end
   end
 
@@ -85,7 +91,7 @@ class PostsController < ApplicationController
   private
     
     def post_params
-      params.require(:post).permit(:title, :url, :content_final, :posted)
+      params.require(:post).permit(:title, :url, :content_final, :posted, :guest_comment, :comments_on)
     end
 
 end

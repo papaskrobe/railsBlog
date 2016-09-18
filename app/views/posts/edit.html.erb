@@ -9,7 +9,7 @@
       <%= f.text_field :title, :oninput => "makeURL(url_text)", :value => @post.title %>
     </div>
     <div class="large-2 small-4 columns end">
-      <label for="url_length">Length</label>
+      <label for="url_length">URL Length</label>
       <input type="number" id="url_length" oninput="makeURL(url_text)" min="5" max="50" value="25">
     </div>
   </div>
@@ -20,6 +20,23 @@
       <%= f.label :url, "URL" %>
       <%= f.text_field :url, :id => "url_text", :value => @post.url %>
 
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-3 columns">
+    <%= f.label :comments_on, "Comments:" %>
+    <div class="switch">
+      <%= f.check_box :comments_on, :id => "comments_on" %>
+      <label for="comments_on"></label>
+    </div>
+  </div>
+  <div class="large-3 columns end">
+    <%= f.label :guest_comment, "Guest Comments:" %>
+    <div class="switch">
+      <%= f.check_box :guest_comment, :id => "guest_comment" %> 
+      <label for="guest_comment"></label>
+    </div>
   </div>
 </div>
   
@@ -37,9 +54,13 @@
   <div class="large-2 small-4 columns">
     <span class="small button" onclick="changeText(content_preview)">Preview</span>
   </div>
-  <div class="large-2 small-4 end columns">
-    <%= f.submit "Publish", class: "small button" %>
-  </div>
+  <% if @post.posted == nil then %> 
+    <div class="large-2 small-4 end columns">
+      <%= f.submit "Publish", class: "small button" %>
+    </div>
+  <% else %>
+    <div class="large-2 small-4 end columns"></div>
+  <% end %>
 </div>
 
 <% end %>    

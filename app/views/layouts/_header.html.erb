@@ -13,14 +13,23 @@
     <ul class="right">
       <li class="has-dropdown not-click">
       <% if logged_in? %>
-        <a><%= @current_user.name %></a>
+        <a><%= "Welcome, #{@current_user.name}" %></a>
         <ul class="dropdown">
           <li><%= link_to "User page", current_user %>
+	  <li class="has-dropdown"><%= link_to "Posts", "#" %>
+            <ul class="dropdown">
+              <li><label>Posts</label></li>
+              <li><%= link_to "New", new_post_path %></li>
+              <li><%= link_to "Edit", edit_path %></li>
+            </ul>
+          </li> 
+          <li class="divider"></li>
           <li><%= link_to "Log out", logout_path, method: "delete" %></li>
-        </ul>
+            </ul>
       <% else %>
-        <%= link_to "Log in", login_path %>
+        <a>User</a>	
         <ul class="dropdown">
+          <li><%= link_to "Log in", login_path %></li>
           <li><%= link_to "Sign up", signup_path %></li>
         </ul>
       <% end %>

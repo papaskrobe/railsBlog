@@ -11,6 +11,31 @@
   color: #000000;
 }
 
+.panel-comment {
+  @extend .panel;
+  
+  ul {
+    list-style-type:none;
+
+    li:first-of-type {      //Username
+      font-size: 1.2em;
+      font-weight: bold;
+
+    }
+
+    li:nth-of-type(2) {     //Date+link
+      a {
+        color: #888888;
+        font-size: 0.8em; 
+      }
+    }
+
+    li:nth-of-type(3) {     //Text
+      font-family: Serif;
+    }
+  }
+}
+
 .panel-center {
   @extend .panel;
   background-color: #BBBBBB;
@@ -26,7 +51,10 @@
   }
 }
 
-
+.caption {
+  text-align: center;
+  font-style: italic;
+}
 
 
 

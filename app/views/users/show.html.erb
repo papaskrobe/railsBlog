@@ -7,23 +7,31 @@
 
 
 
-  <%= form_for(@user) do |f| %>
+<%= form_for(@user) do |f| %>
+
 
 <% if current_user && current_user.status_admin? %>
 
     <%= f.label :moderator %>
-    <%= f.check_box :status_moderator %><p>
-    
+    <div class="switch">
+      <%= f.check_box :status_moderator, :id => "statusModerator" %>
+      <label for="statusModerator"></label>
+    </div>
 
     <%= f.label :writer %>
-    <%= f.check_box :status_writer %><p>
-
+    <div class="switch">
+      <%= f.check_box :status_writer, :id => "status_writer" %>
+      <label for="status_writer"></label>
+    </div>
 <% end %>
 
 <% if current_user && (current_user.status_admin? || current_user.status_moderator?) %>
 
     <%= f.label :commentor %>
-    <%= f.check_box :status_commentor  %><p>
+    <div class="switch">
+      <%= f.check_box :status_commentor, :id=> "status_commentor" %>
+      <label for="status_commentor"></label>
+    </div>
 <% end %>
 
 <% if (current_user ==  @user) || (current_user && (current_user.status_admin? || current_user.status_moderator?)) %>
@@ -35,10 +43,14 @@
 
 <% end %>
 
-    <%= f.submit "Save changes", class: "small button" %>
 
-  <% end %>
+<% if (current_user == @user) || (current_user && (current_user.status_admin? || current_user.status_moderator?)) %>
+
+    <%= f.submit "Save changes", class: "small button" %>
+<% end %>
+
+<% end %>
+
 
   </div>
-
 </div>

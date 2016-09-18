@@ -4,8 +4,11 @@ Rails.application.routes.draw do
 
   resources :posts
   resources :users
+  resources :comments, only: [:create, :destroy]
+
 
   get 'edit' => 'posts#edit'
+  get 'posts/edit' => 'posts#edit'
   get 'edit/:id' => 'posts#edit'
   get 'page/:id' => 'posts#page'
 
@@ -14,6 +17,8 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
+
+  #somehow do 404 in here, I guess?
  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

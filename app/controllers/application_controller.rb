@@ -20,11 +20,11 @@ class ApplicationController < ActionController::Base
 
     
     def admin_user
-      redirect_to(root_url) unless current_user.status_admin?
+      redirect_to(root_url) unless current_user && current_user.status_admin?
     end
 
     def writer_user
-      redirect_to(root_url) unless current_user.status_writer?
+      redirect_to(root_url) unless current_user && current_user.status_writer?
     end
 
 end

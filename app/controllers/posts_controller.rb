@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
   before_action :logged_in_user, only: :new
-  before_action :writer_user, only: :new
+  before_action :writer_user, only: [:new, :edit, :create]
 
   def index
     redirect_to root_url
@@ -43,15 +43,15 @@ class PostsController < ApplicationController
   end
 
   def edit
-    if current_user && (current_user.status_writer? || current_user.status_admin?) then 
+    #if current_user && (current_user.status_writer? || current_user.status_admin?) then 
       if !Post.find_by(id: params[:id])  then
         render 'choose'
       else
         @post = Post.find(params[:id])
       end
-    else
-     redirect_to root_url 
-    end
+    #else
+    # redirect_to root_url 
+    #end
   end
 
   def update

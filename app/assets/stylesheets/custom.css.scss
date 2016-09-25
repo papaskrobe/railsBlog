@@ -13,7 +13,11 @@
 
 .panel-comment {
   @extend .panel;
-  
+
+    .show-comment {
+      color: #000000        //Reply link
+  } 
+ 
   ul {
     list-style-type:none;
 

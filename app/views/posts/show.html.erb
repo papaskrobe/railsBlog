@@ -1,5 +1,21 @@
 <% provide(:title, @post.title) %>
 
+<script>
+$(document).ready(function(){
+  $(".comment-reply").hide();
+
+  $(".show-comment").click(function(){
+    if( $("#reply-" + this.id.match(/[0-9]+/)).is(":visible") != true ) {
+      $(".comment-reply").hide();
+      $("#reply-" + this.id.match(/[0-9]+/)).show();
+    } else {
+      $(".comment-reply").hide();
+    }
+  });
+});
+</script>
+
+
 <div class="row small-11 large-12 panel-center">
   <%= render '/posts/post' %>
 </div>
@@ -16,8 +32,6 @@
     <% prev_and_next_posts = prev_and_next(@post.id.to_i) %>
     <% if prev_and_next_posts[:nexttitle] != nil then  %>
       <%= link_to("Next: " + prev_and_next_posts[:nexttitle], "/posts/" + prev_and_next_posts[:nexturl]) %>
-
-
     <% end %>
   </div>
 
@@ -25,25 +39,51 @@
 
 <div class="row small-11 large-12 panel">
 
-<% if @post.guest_comment == true || (current_user && comments_on == true)  %>
+<% if @post.guest_comment == true || (current_user && @post.comments_on == true)  %>
   <%= form_for(@comment) do |f| %>
     <%= f.label :comment %>
     <%= f.text_area :content %>
 
-    <%= f.submit "Submit", class: "small button" %>
+    <%= f.hidden_field :to_post, value: @post.id %>
+    <%= f.hidden_field :response_to, value: nil %>
+    <div align="right">
+      <%= f.submit "Post comment", class: "small button", align: "right" %>
+    </div>
   <% end %>
 <% end %>
 
   <% print_comments(Comment.where(to_post: @post.id.to_i), 0, nil) do |comment, indent| %>
-    <% @comment = comment %>
-    <% indent = 5 unless indent < 5 %> 
+    <% @comm = comment %>
+    <% if indent < 5 then @indent = indent else @indent = 5 end %> 
     <div class="small-1 columns"></div>
-      <div class="small-<%= 12 - indent %> small-offset-<%= indent %> columns">
-      <div class="panel-comment" id="comment-<%= @comment.id %>">
+    <div class="small-<%= 12 - @indent %> small-offset-<%= @indent %> columns">
+      <div class="panel-comment" id="comment-<%= @comm.id %>">
         <%= render 'comments/comment' %>
-      <div align="right">Reply</div>
+        <% if @post.guest_comment == true || (current_user && @post.comments_on == true)  %>
+          <div align="right">
+            <a class="show-comment" id="reply-link-<%= @comm.id %>"> Reply</a>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="comment-reply" id="reply-<%= @comm.id %>">
+
+        <% if @post.guest_comment == true || (current_user && @post.comments_on == true)  %>
+        <%= form_for(@comment) do |f| %>
+          <%= f.text_area :content %>
+  
+          <%= f.hidden_field :to_post, value: @post.id %>
+          <%= f.hidden_field :response_to, value: @comm.id %>
+          <div align="right">
+            <%= f.submit "Post comment", class: "button tiny" %>
+        <% end %>
+          </div>
+        <% end %>
+
       </div>
     </div>
   <% end %>
+</div>
+
 
 </div>

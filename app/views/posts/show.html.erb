@@ -37,7 +37,7 @@ $(document).ready(function(){
 
 </div>
 
-<div class="row small-11 large-12 panel">
+<div class="row small-11 large-12 panel" id="comments">
 
 <% if @post.guest_comment == true || (current_user && @post.comments_on == true)  %>
   <%= form_for(@comment) do |f| %>

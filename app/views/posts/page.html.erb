@@ -1,8 +1,11 @@
 <div class="row small-11 large-12 panel-center">
 
-<% @page_posts.compact.each do |x| %>
-  <% @post =  x %>
+<% @page_posts.compact.each do |post| %>
+  <% @post =  post %>
   <%= render 'posts/post' %>
+  <div class="panel-post">
+  <%= link_to "Comments:" +  Comment.where(to_post: post.id).count.to_s, post_path(@post, anchor: "comments")  %> 
+  </div>
 <% end %>
 
 </div>

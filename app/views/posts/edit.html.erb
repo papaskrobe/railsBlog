@@ -46,20 +46,25 @@
   </div>
 </div>
 
-
+<% if @post.posted == nil then %>
+  <% button_titles = ["Save","Publish","Delete"] %>
+<% else %>
+  <% button_titles = ["Save/Continue", "Save/Quit","Unpublish"] %>
+<% end %>
 <div class="row">
-  <div class="large-2 small-4 columns">
-    <%= f.submit "Save", class: "small button", name: "save" %>
-  </div>
-  <div class="large-2 small-4 columns">
+  <div class="large-2 small-3 columns">
     <span class="small button" onclick="changeText(content_preview)">Preview</span>
   </div>
-  <% if @post.posted == nil then %> 
-    <div class="large-2 small-4 end columns">
-      <%= f.submit "Publish", class: "small button" %>
+  <div class="large-2 small-3 columns">
+    <%= f.submit button_titles[0], class: "small button", name: "save" %>
+  </div>
+  <div class="large-2 small-3 columns">
+    <%= f.submit button_titles[1], class: "small button" %>
+  </div>
+  <% if @post.id != nil then %> 
+    <div class="large-2 small-3 columns end">
+      <%= f.submit button_titles[2], class: "small button", name: "unpublish" %> 
     </div>
-  <% else %>
-    <div class="large-2 small-4 end columns"></div>
   <% end %>
 </div>
 

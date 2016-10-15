@@ -1,7 +1,13 @@
 <ul>
   
-  <li><%= @comm.user ? @comm.user.name : "anonymous"  %></li>
-  <li><%= link_to(@comm.created_at.strftime("%b %-d, %Y %H:%M:%S"), "/posts/" + @comm.to_post.to_s + "#comm-" + @comm.id.to_s) %></li>
+  <li>
+    <% if @comm.user %>
+      <%= link_to @comm.user.name, user_path(@comm.user) %>
+    <% else %>
+      anonymous
+    <% end %>
+  </li>
+  <li><%= link_to(@comm.created_at.strftime("%b %-d, %Y %H:%M:%S"), "/posts/" + @comm.to_post.to_s + "#comment-" + @comm.id.to_s) %></li>
   <li><%= @comm.content %></li>
 
 </ul>

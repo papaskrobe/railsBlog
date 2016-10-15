@@ -43,15 +43,11 @@ class PostsController < ApplicationController
   end
 
   def edit
-    #if current_user && (current_user.status_writer? || current_user.status_admin?) then 
       if !Post.find_by(id: params[:id])  then
         render 'choose'
       else
         @post = Post.find(params[:id])
       end
-    #else
-    # redirect_to root_url 
-    #end
   end
 
   def update
@@ -60,6 +56,16 @@ class PostsController < ApplicationController
     if params[:save]
       if @post.update(post_params)
         redirect_to ("/edit/" + @post.id.to_s)
+      end
+    elsif params[:unpublish]
+      if @post.posted == nil then
+        @post.delete
+        redirect_to root_url
+      else
+        @post.posted = nil
+        if @post.update(post_params)
+          redirect_to root_url
+        end 
       end
     else
       if @post.posted == nil then

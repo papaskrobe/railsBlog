@@ -4,7 +4,7 @@
   <% @post =  post %>
   <%= render 'posts/post' %>
   <div class="panel-post">
-  <%= link_to "Comments:" +  Comment.where(to_post: post.id).count.to_s, post_path(@post, anchor: "comments")  %> 
+  <%= link_to "Comments: " +  Comment.where(to_post: post.id).where.not(user_id: nil).count.to_s, post_path(@post, anchor: "comments")  %> 
   </div>
 <% end %>
 

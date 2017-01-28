@@ -14,28 +14,37 @@
 .panel-comment {
   @extend .panel;
 
-    .show-comment {
-      color: #000000        //Reply link
+    .show-comment {         //Reply link
+      color: #000000;
   } 
  
-  ul {
+  ul {                      //Comment proper
     list-style-type:none;
 
     li:first-of-type {      //Username
       font-size: 1.2em;
       font-weight: bold;
-
+      color: #555;
+      a       { color:black; } 
+      a:hover { color: #34d; }
     }
 
     li:nth-of-type(2) {     //Date+link
       a {
-        color: #888888;
+        color: #888;
         font-size: 0.8em; 
+      }
+      a:hover { 
+        color: #999;
       }
     }
 
     li:nth-of-type(3) {     //Text
       font-family: Serif;
+    }
+
+    li:nth-of-type(4) {    //Signature
+      p { font-size: 0.8em; }
     }
   }
 }

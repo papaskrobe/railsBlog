@@ -1,0 +1,35 @@
+<% provide(:title, "Comments pending approval") %>
+
+<div class="row small-11 large-12 panel-center">
+
+<%= form_tag do %>
+
+  <% @comment.each do |comment| %>
+
+<div class="panel-comment">
+  <% @comm = comment %>
+  <%= render "comments/comment" %>
+  <div class="row">
+    <div class="small-2 columns">
+      <%= label_tag "Approve" %>
+      <div class="switch tiny">
+        <%= radio_button_tag("comments[#{@comm.id.to_s}]","Approved") %> 
+        <label for="<%= "comments_#{@comm.id.to_s}_Approved" %>"></label>
+      </div>
+    </div>
+    <div class="small-2 columns end">
+      <%= label_tag "Delete" %>
+      <div class="switch tiny">
+        <%= radio_button_tag("comments[#{@comm.id.to_s}]","Deleted") %> 
+        <label for="<%= "comments_#{@comm.id.to_s}_Deleted" %>"></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <% end %>
+
+  <%= submit_tag("Approve") %>
+<% end %>
+
+</div>

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :posts
   resources :users
-  resources :comments, only: [:create, :destroy]
+  resources :comments, only: [:create, :update, :destroy]
 
 
   get 'edit' => 'posts#edit'
@@ -14,9 +14,13 @@ Rails.application.routes.draw do
 
   get 'signup' => 'users#new'
 
+  get 'pending_approval' => 'comments#pending'
+  post 'pending_approval' => 'comments#approved'
+
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
+
 
   #somehow do 404 in here, I guess?
  

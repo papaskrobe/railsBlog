@@ -9,5 +9,10 @@
   </li>
   <li><%= link_to(@comm.created_at.strftime("%b %-d, %Y %H:%M:%S"), "/posts/" + @comm.to_post.to_s + "#comment-" + @comm.id.to_s) %></li>
   <li><%= @comm.content %></li>
-
+  <li>
+    <% if @comm.user %>
+    <hr>
+    <%= simple_format(User.find(@comm.user_id).signature) %>
+    <% end %>
+  </li>
 </ul>

@@ -1,6 +1,6 @@
 module ApplicationHelper
 
-  def print_comments(comments, indent, reply_look)
+  def print_comments(comments, indent = 0, reply_look)
     (comments.length).times do |comment|
       if comments[comment] != nil && comments[comment].response_to == reply_look then
         yield comments[comment], indent

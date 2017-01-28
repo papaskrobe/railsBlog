@@ -52,7 +52,7 @@ $(document).ready(function(){
   <% end %>
 <% end %>
 
-  <% print_comments(Comment.where(to_post: @post.id.to_i), 0, nil) do |comment, indent| %>
+  <% print_comments(Comment.where(to_post: @post.id.to_i).where.not(user_id: nil), 0, nil) do |comment, indent| %>
     <% @comm = comment %>
     <% if indent < 5 then @indent = indent else @indent = 5 end %> 
     <div class="small-1 columns"></div>

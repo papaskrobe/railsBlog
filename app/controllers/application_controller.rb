@@ -12,12 +12,6 @@ class ApplicationController < ActionController::Base
         redirect_to login_url 
       end
     end
-
-
-    def correct_user
-
-    end
-
     
     def admin_user
       redirect_to(root_url) unless current_user && current_user.status_admin?
@@ -27,4 +21,7 @@ class ApplicationController < ActionController::Base
       redirect_to(root_url) unless current_user && current_user.status_writer?
     end
 
+    def moderator_user
+      redirect_to(root_url) unless current_user && current_user.status_moderator?
+    end
 end

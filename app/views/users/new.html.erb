@@ -14,6 +14,9 @@
       <%= f.label :email %>
       <%= f.text_field :email, class: 'form-control' %>
 
+      <%= f.label :time_zone %>
+      <%= f.select(:time_zone, options_for_select(all_time_zones), class: 'form-control') %>
+
       <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>
 

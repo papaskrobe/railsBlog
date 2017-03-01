@@ -5,13 +5,10 @@
   <div class="small-11 small-centered large-12 columns panel-post">
     <h1><%= @user.name %></h1>
 
-
-
 <%= form_for(@user) do |f| %>
 
 
 <% if current_user && current_user.status_admin? %>
-
     <%= f.label :moderator %>
     <div class="switch">
       <%= f.check_box :status_moderator, :id => "statusModerator" %>
@@ -26,7 +23,6 @@
 <% end %>
 
 <% if current_user && (current_user.status_admin? || current_user.status_moderator?) %>
-
     <%= f.label :commentor %>
     <div class="switch">
       <%= f.check_box :status_commentor, :id=> "status_commentor" %>
@@ -34,18 +30,20 @@
     </div>
 <% end %>
 
-<% if (current_user ==  @user) || (current_user && (current_user.status_admin? || current_user.status_moderator?)) %>
-    <%= f.label :signature %>
-    <%= f.text_area :signature, size: "20x4", resize: "none" %>
-
-<% else %>
-    <%= @user.signature %>
-
+<% if (current_user == @user) || (current_user && (current_user.status_admin? || current_user.status_moderator?)) %>
+    <%= f.label :time_zone %>
+    <%= f.select(:time_zone, options_for_select(all_time_zones, @user[:time_zone].to_s)) %>
 <% end %>
 
+<% if (current_user == @user) || (current_user && (current_user.status_admin? || current_user.status_moderator?)) %>
+    <%= f.label :signature %>
+    <%= f.text_area :signature, size: "20x4", resize: "none" %>
+<% else %>
+    <% #put some styling here %>
+    <%= @user.signature %>
+<% end %>
 
 <% if (current_user == @user) || (current_user && (current_user.status_admin? || current_user.status_moderator?)) %>
-
     <%= f.submit "Save changes", class: "small button" %>
 <% end %>
 

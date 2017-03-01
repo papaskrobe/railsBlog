@@ -13,9 +13,10 @@
 
 .panel-comment {
   @extend .panel;
-
-    .show-comment {         //Reply link
-      color: #000000;
+  background-color: #FFF9FC;
+    .show-comment {         //Reply+edit+delete links
+      font-size: 8pt;
+      color: #666;
   } 
  
   ul {                      //Comment proper
@@ -24,7 +25,7 @@
     li:first-of-type {      //Username
       font-size: 1.2em;
       font-weight: bold;
-      color: #555;
+      //color: #555;
       a       { color:black; } 
       a:hover { color: #34d; }
     }
@@ -69,5 +70,14 @@
   font-style: italic;
 }
 
-
+.email-popup {
+  font-size: 0.75em;
+  vertical-align: middle;
+  background-color: #FFF9FC;
+  border-style: outset;
+  display: none;
+  position: absolute;
+  left: 25%; 
+  padding: 5px;
+}
 

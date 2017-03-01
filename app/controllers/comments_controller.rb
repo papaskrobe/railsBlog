@@ -1,12 +1,12 @@
 class CommentsController < ApplicationController
 
-  before_action :admin_user, only: [:destroy, :update, :pending, :release]
-  
+  before_action :moderator_user, only: [:pending] 
 
   def create
     if (current_user && Post.where(id: params["comment"][:to_post]).first[:comments_on])
       @comment = current_user.comments.build(comment_params)
       @comment.user_id = current_user.id
+      @comment.ip_address = request.remote_ip
       if !@comment.save
         flash[:danger] = "Comment unavailable, please try again" 
         redirect_to ("/posts/" + @comment.to_post.to_s)
@@ -19,6 +19,7 @@ class CommentsController < ApplicationController
       @comment.content = params[:comment][:content] 
       @comment.response_to = params[:comment][:response_to]
       @comment.to_post = params[:comment][:to_post]
+      @comment.ip_address = request.remote_ip
       if !@comment.save
         flash[:danger] = "Comment unavailable, please try again"
         redirect_to ("/posts/" + @comment.to_post.to_s)
@@ -31,16 +32,26 @@ class CommentsController < ApplicationController
     end
   end
 
+  def show
+    redirect_to ("/posts/" + Comment.find(params[:id]).to_post.to_s + "#comment-" + params[:id])
+  end
+
+
   def destroy
     Comment.find(params[:id]).destroy
     flash[:success] = "Comment deleted"
     redirect_to :back
   end
 
+  def edit
+    @comment = Comment.find(params[:id])
+    redirect_to(root_url) unless correct_user(@comment)
+  end
+
   def update
     @comment = Comment.find(params[:id])
-    if @comment.update_attributes(params[:comment]) then
-     redirect_to root_path
+    if (correct_user(@comment) && @comment.update(comment_params)) then
+     redirect_to @comment 
     else
       flash[:success] = "Update unavailable"
       redirect_to :back
@@ -52,12 +63,14 @@ class CommentsController < ApplicationController
   end
 
   def approved
-    params["comments"].each do |key, value|
-      if value == "Approved" then
-        Comment.where(id: key).first.update(user_id: 0)
-      elsif value == "Deleted" then
-        Comment.where(id: key).first.destroy
-      end 
+    if params["comments"] then
+      params["comments"].each do |key, value|
+        if value == "Approved" then
+          Comment.where(id: key).first.update(user_id: 0)
+        elsif value == "Deleted" then
+          Comment.where(id: key).first.destroy
+        end 
+      end
     end
     redirect_to :back
   end
@@ -68,4 +81,7 @@ class CommentsController < ApplicationController
       params.require(:comment).permit(:content, :user_id, :response_to, :to_post)
     end
 
+    def correct_user(comment)
+      (current_user && ((current_user.status_admin? || current_user.status_moderator?) || comment.user_id == current_user[:id])) 
+    end 
 end

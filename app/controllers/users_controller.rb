@@ -28,10 +28,10 @@ class UsersController < ApplicationController
   private
 
     def user_create_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :time_zone)
     end
 
     def user_update_params
-      params.require(:user).permit(:email, :status_commentor, :status_moderator, :status_writer, :signature) 
+      params.require(:user).permit(:email, :status_commentor, :status_moderator, :status_writer, :signature, :time_zone) 
     end
 end

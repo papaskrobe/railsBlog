@@ -1,5 +1,13 @@
 <% provide(:title, "Comments pending approval") %>
 
+<script>
+$(document).ready(function(){
+  $('input:checkbox').click(function() {
+    //alert($(".switch").length);
+  });
+});
+</script>
+
 <div class="row small-11 large-12 panel-center">
 
 <%= form_tag do %>
@@ -13,15 +21,15 @@
     <div class="small-2 columns">
       <%= label_tag "Approve" %>
       <div class="switch tiny">
-        <%= radio_button_tag("comments[#{@comm.id.to_s}]","Approved") %> 
-        <label for="<%= "comments_#{@comm.id.to_s}_Approved" %>"></label>
+        <%= check_box_tag("comments[#{@comm.id.to_s}]","Approved", false, { class: "comments[#{@comm.id.to_s}]", id: "comments[#{@comm.id.to_s}]_Approved" }) %> 
+        <label for="<%= "comments[#{@comm.id.to_s}]_Approved" %>"></label>
       </div>
     </div>
     <div class="small-2 columns end">
       <%= label_tag "Delete" %>
       <div class="switch tiny">
-        <%= radio_button_tag("comments[#{@comm.id.to_s}]","Deleted") %> 
-        <label for="<%= "comments_#{@comm.id.to_s}_Deleted" %>"></label>
+        <%= check_box_tag("comments[#{@comm.id.to_s}]","Deleted",false, { class: "comments[#{@comm.id.to_s}]", id: "comments[#{@comm.id.to_s}]_Deleted" }) %> 
+        <label for="<%= "comments[#{@comm.id.to_s}]_Deleted" %>"></label>
       </div>
     </div>
   </div>

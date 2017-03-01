@@ -1,0 +1,20 @@
+<%= form_for(@comment) do |f| %>
+  <% if !logged_in? %>
+    <%= f.label :"Email (optional)", style: "float:left" %>
+    <%= f.label :" (?)", { style: "float:left", class: "email-question" } %>
+    <div class="email-popup" style="float:left">
+      Anonymous comments without email addresses require moderator approval before posting. Anonymous comments <em>with</em> email addresses also require moderator approval, for now.
+    </div>
+    <%= text_field_tag 'email' %>
+  <% end %>
+
+  <%= f.label :comment %>
+  <%= f.text_area :content %>
+
+  <%= f.hidden_field :to_post, value: @post.id %>
+  <%= f.hidden_field :response_to, value: reply_to %>
+  <div align="right">
+    <%= f.submit "Post comment", class: "small button", align: "right" %>
+  </div>
+<% end %>
+

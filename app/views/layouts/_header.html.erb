@@ -16,13 +16,15 @@
         <a><%= "Welcome, #{@current_user.name}" %></a>
         <ul class="dropdown">
           <li><%= link_to "User page", current_user %>
-	  <li class="has-dropdown"><%= link_to "Posts", "#" %>
-            <ul class="dropdown">
-              <li><label>Posts</label></li>
-              <li><%= link_to "New", new_post_path %></li>
-              <li><%= link_to "Edit", edit_path %></li>
-            </ul>
-          </li> 
+          <% if logged_in? && (current_user.status_admin || current_user.status_writer) %>
+       	    <li class="has-dropdown"><%= link_to "Posts", "#" %>
+              <ul class="dropdown">
+                <li><label>Posts</label></li>
+                <li><%= link_to "New", new_post_path %></li>
+                <li><%= link_to "Edit", edit_path %></li>
+              </ul>
+            </li> 
+           <% end %>
           <li class="divider"></li>
           <li><%= link_to "Log out", logout_path, method: "delete" %></li>
             </ul>

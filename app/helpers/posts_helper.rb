@@ -1,5 +1,6 @@
 module PostsHelper
 
+#once posts have an author to them, put a 'where' in the posted/unposted methods
   def list_posted()
     Post.where.not(posted: nil).map {|i| [i.id.to_s + ". " + i.title, i.id.to_s] }
   end

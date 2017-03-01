@@ -1,0 +1,21 @@
+<div class ="row panel-content">
+<div class="panel-post">
+
+<% if (@comment[:response_to]) %>
+  <% @comm = Comment.where(id: @comment[:response_to]).first %>
+  <div class="panel-comment">
+    <%= render 'comments/comment' %>
+  </div>
+<% end %>
+
+<%= form_for(@comment) do |f| %>
+
+  <%= f.label :comment %>
+  <%= f.text_area :content %>
+
+  <%= f.submit "Update", class: "small button" %>
+
+<% end %>
+
+</div>
+</div>

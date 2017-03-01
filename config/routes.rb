@@ -4,13 +4,14 @@ Rails.application.routes.draw do
 
   resources :posts
   resources :users
-  resources :comments, only: [:create, :update, :destroy]
+  resources :comments, only: [:create, :update, :destroy, :edit]
 
 
   get 'edit' => 'posts#edit'
   get 'posts/edit' => 'posts#edit'
   get 'edit/:id' => 'posts#edit'
   get 'page/:id' => 'posts#page'
+  get 'comments/:id' => 'comments#show'
 
   get 'signup' => 'users#new'
 

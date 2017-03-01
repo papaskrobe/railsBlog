@@ -1,18 +1,20 @@
+<% user = @comm.user %>
+<% time = @comm.created_at + (current_user ? current_user.time_zone : 0) %>
+
 <ul>
-  
   <li>
-    <% if @comm.user %>
-      <%= link_to @comm.user.name, user_path(@comm.user) %>
-    <% else %>
-      anonymous
-    <% end %>
+      <%= (user ? link_to(user.name, user_path(user)) : "anonymous") %>
+      <% if current_user && (current_user.status_admin || current_user.status_moderator) %>
+        <small>(<%= @comm.ip_address %>)</small>
+      <% end %>
   </li>
-  <li><%= link_to(@comm.created_at.strftime("%b %-d, %Y %H:%M:%S"), "/posts/" + @comm.to_post.to_s + "#comment-" + @comm.id.to_s) %></li>
+  <li><%= link_to(time.strftime("%b %-d, %Y %H:%M:%S"), "/posts/" + @comm.to_post.to_s + "#comment-" + @comm.id.to_s) %></li>
   <li><%= @comm.content %></li>
   <li>
-    <% if @comm.user %>
+    <% if user && not(user.signature.empty?) %>
     <hr>
-    <%= simple_format(User.find(@comm.user_id).signature) %>
+    <%= simple_format(user.signature) %>
     <% end %>
   </li>
 </ul>
+

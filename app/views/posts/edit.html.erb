@@ -63,7 +63,7 @@
   </div>
   <% if @post.id != nil then %> 
     <div class="large-2 small-3 columns end">
-      <%= f.submit button_titles[2], class: "small button", name: "unpublish" %> 
+      <%= f.submit button_titles[2], class: "small button", name: "unpublish", data: { confirm: "Are you sure?" } %> 
     </div>
   <% end %>
 </div>

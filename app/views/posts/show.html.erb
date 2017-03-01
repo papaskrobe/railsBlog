@@ -3,6 +3,7 @@
 <script>
 $(document).ready(function(){
   $(".comment-reply").hide();
+  $(".email-popup").hide();
 
   $(".show-comment").click(function(){
     if( $("#reply-" + this.id.match(/[0-9]+/)).is(":visible") != true ) {
@@ -11,6 +12,12 @@ $(document).ready(function(){
     } else {
       $(".comment-reply").hide();
     }
+  });
+
+  $(".email-question").hover(function() {
+      $(".email-popup").show();
+    }, function() {
+      $(".email-popup").hide();
   });
 });
 </script>
@@ -40,16 +47,7 @@ $(document).ready(function(){
 <div class="row small-11 large-12 panel" id="comments">
 
 <% if @post.guest_comment == true || (current_user && @post.comments_on == true)  %>
-  <%= form_for(@comment) do |f| %>
-    <%= f.label :comment %>
-    <%= f.text_area :content %>
-
-    <%= f.hidden_field :to_post, value: @post.id %>
-    <%= f.hidden_field :response_to, value: nil %>
-    <div align="right">
-      <%= f.submit "Post comment", class: "small button", align: "right" %>
-    </div>
-  <% end %>
+  <%= render partial: "comment", locals: {reply_to: nil} %>
 <% end %>
 
   <% print_comments(Comment.where(to_post: @post.id.to_i).where.not(user_id: nil), 0, nil) do |comment, indent| %>
@@ -59,31 +57,27 @@ $(document).ready(function(){
     <div class="small-<%= 12 - @indent %> small-offset-<%= @indent %> columns">
       <div class="panel-comment" id="comment-<%= @comm.id %>">
         <%= render 'comments/comment' %>
+
+        <% if (current_user && ((current_user.status_admin || current_user.status_moderator) || current_user[:id] == @comm.user_id)) %> 
+          <%= link_to("Edit", edit_comment_path(@comm), { class: "show-comment" }) %>
+          <%= link_to("Delete", comment, method: :delete, data: { confirm: "Are you sure?" }, class: "show-comment") %>
+        <% end %>
         <% if @post.guest_comment == true || (current_user && @post.comments_on == true)  %>
-          <div align="right">
+          <span style="float:right">
             <a class="show-comment" id="reply-link-<%= @comm.id %>"> Reply</a>
-          </div>
+          </span>
         <% end %>
       </div>
 
       <div class="comment-reply" id="reply-<%= @comm.id %>">
 
         <% if @post.guest_comment == true || (current_user && @post.comments_on == true)  %>
-        <%= form_for(@comment) do |f| %>
-          <%= f.text_area :content %>
-  
-          <%= f.hidden_field :to_post, value: @post.id %>
-          <%= f.hidden_field :response_to, value: @comm.id %>
-          <div align="right">
-            <%= f.submit "Post comment", class: "button tiny" %>
-        <% end %>
-          </div>
+            <%= render partial: "comment", locals: {reply_to: @comm.id} %>
         <% end %>
 
       </div>
     </div>
   <% end %>
 </div>
-
 
 </div>

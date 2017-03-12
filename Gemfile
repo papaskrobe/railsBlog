@@ -6,6 +6,7 @@ gem 'rails', '4.2.2'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '1.3.11' #added version here
+gem 'mysql', '2.9.1'    #added mysql for production
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0.0'

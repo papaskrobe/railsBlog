@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   attr_accessor :remember_token
 
   before_save { self.email = email.downcase }
-  before_save { self.last_karma = (Time.now - 22.hours) }
+  before_save { self.last_karma = (Time.now - 23.hours) }
 
   VALID_NAME_REGEX = /\A.*[a-zA-Z].*/  #NOT YET IMPLEMENTED
   

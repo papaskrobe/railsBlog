@@ -79,6 +79,7 @@ GEM
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.11.2)
+    mysql (2.9.1)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     quill-rails (0.1.4)
@@ -159,6 +160,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails (= 4.1.1)
   jquery-ui-rails
+  mysql (= 2.9.1)
   quill-rails (= 0.1.4)
   rails (= 4.2.2)
   sass-rails (~> 5.0.0)

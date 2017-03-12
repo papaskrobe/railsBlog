@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 
-  before_action :moderator_user, only: [:pending] 
+  before_action :moderator_user, only: [:pending, :destroy] 
 
   def create
     if (current_user && Post.where(id: params["comment"][:to_post]).first[:comments_on])
@@ -38,6 +38,8 @@ class CommentsController < ApplicationController
 
 
   def destroy
+    response = Comment.where(id: params[:id]).first[:response_to]
+    Comment.where(response_to: params[:id]).each { |x| x.update_attribute(:response_to, response) }
     Comment.find(params[:id]).destroy
     flash[:success] = "Comment deleted"
     redirect_to :back
@@ -83,5 +85,9 @@ class CommentsController < ApplicationController
 
     def correct_user(comment)
       (current_user && ((current_user.status_admin? || current_user.status_moderator?) || comment.user_id == current_user[:id])) 
+    end 
+
+    def moderator_user
+      redirect_to(root_url) unless current_user.status_moderator?
     end 
 end

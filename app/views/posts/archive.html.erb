@@ -1,0 +1,11 @@
+<% provide(:title, "Post archive") %>
+
+<div class="row small-11 large-12 panel-center">
+  <div class="large-12 columns panel-post">
+    <h1 align="center">Post archive</h1>
+    <% @posts.each do |post| %>
+      <%= post[:posted].strftime("%m/%d/%Y") %>: <%= link_to post[:title], post %><br>
+    <% end %> 
+
+  </div>
+</div>

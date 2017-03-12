@@ -94,10 +94,17 @@ class PostsController < ApplicationController
 
   end
 
+  def archive
+    @posts = Post.where.not(posted: nil).order(posted: :desc)
+  end
+
   private
     
     def post_params
       params.require(:post).permit(:title, :url, :content_final, :posted, :guest_comment, :comments_on)
     end
 
+    def correct_user(post)
+      (current_user && (current_user.status_admin? || post.user_id == current_user[:id]))
+    end
 end

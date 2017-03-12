@@ -6,9 +6,9 @@ Rails.application.routes.draw do
   resources :users
   resources :comments, only: [:create, :update, :destroy, :edit]
 
-
+  get 'archive' => 'posts#archive'
   get 'edit' => 'posts#edit'
-  get 'posts/edit' => 'posts#edit'
+  get 'archive' => 'posts#archive'
   get 'edit/:id' => 'posts#edit'
   get 'page/:id' => 'posts#page'
   get 'comments/:id' => 'comments#show'

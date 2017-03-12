@@ -21,5 +21,11 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: mysql
+  encoding: utf8
+  username: papaskrobe
+  password: mc_2794651
+  host: madness.db
+  port: 3306 
+
+

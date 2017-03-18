@@ -9,13 +9,13 @@ gem 'sqlite3', '1.3.11' #added version here
 gem 'mysql', '2.9.1'    #added mysql for production
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0.0'
+gem 'sass-rails', '5.0.4'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '2.7.2' # '>= 1.3.0' added version info
+gem 'uglifier'
 
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '4.1.1'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -24,7 +24,7 @@ gem 'quill-rails', '0.1.4'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '4.1.1'
-gem 'jquery-ui-rails'
+gem 'jquery-ui-rails', '5.0.5'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -38,7 +38,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'foundation-rails', '5.5.3.2'
 
 # Use ActiveModel has_secure_password
-gem 'bcrypt', '3.1.10'
+gem 'bcrypt', '3.1.11'
+
+#gem 'puma'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

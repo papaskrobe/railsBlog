@@ -23,6 +23,7 @@ test:
 production:
   adapter: mysql
   encoding: utf8
+  database: mysql
   username: papaskrobe
   password: mc_2794651
   host: madness.db

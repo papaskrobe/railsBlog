@@ -1,6 +1,12 @@
 <div class="row panel-content">
 <div class="panel-post">
 
+<script type='text/javascript'>
+function wordCount(id) {
+  id.innerHTML = document.getElementById('content_final').value.split(/[\ |\n|\t]+/).length;
+}
+</script>
+
 <%= form_for(@post) do |f| %>
   <%= render 'shared/error_messages' %>
   <div class="row">
@@ -39,7 +45,16 @@
     </div>
   </div>
 </div>
-  
+ 
+<div class="row">
+  <div class="small-3 columns">
+    <span class="button tiny" onclick="wordCount(word_count)">Word Count</span>
+  </div>
+  <div class="small-3 columns end">
+    <p id="word_count"></p>
+  </div>
+</div> 
+
 <div class="row">
   <div class="large-10 columns panel" style="background-color:#FCFCFC;">
     <%= quill_editor nil, {id: 'content_final', name: 'post[content_final]', rows: '25', value: @post.content_final }  %>

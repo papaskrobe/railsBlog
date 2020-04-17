@@ -90,7 +90,7 @@ class PostsController < ApplicationController
     @page_posts = Post.where.not(posted: nil).order(posted: :desc).offset(((params[:id].to_i)- 1) * @posts_var).take(@posts_var)  
 
     @prev_page = true unless params[:id].to_i == 1
-    @next_page = true unless params[:id].to_i * @posts_var > total_posts
+    @next_page = ((params[:id].to_i * @posts_var > total_posts) ? false : true)
 
   end
 

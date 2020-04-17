@@ -1,15 +1,14 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.2'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '1.3.11' #added version here
+gem 'sqlite3', '1.3.13' #added version here
 gem 'mysql', '2.9.1'    #added mysql for production
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '5.0.4'
+gem 'sass-rails', '5.0.6'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
@@ -40,7 +39,12 @@ gem 'foundation-rails', '5.5.3.2'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '3.1.11'
 
-#gem 'puma'
+#Social-share-button for sharing links in articles
+gem 'shareable'
+
+#Using Puma for deployment
+gem 'puma'
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'

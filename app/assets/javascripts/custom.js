@@ -18,4 +18,3 @@ function makeURL(id) {
 function changeText(id) {
   id.innerHTML = document.getElementById('content_final').value;
 }
-

@@ -25,6 +25,7 @@ $(document).ready(function(){
 
 <div class="row small-11 large-12 panel-center">
   <%= render '/posts/post' %>
+  <%= render_shareable :buttons => ['twitter', 'facebook', 'tumblr', 'reddit', 'google_plus'], :turbolinks => true %>
 </div>
 
 <div class="row small-11 large-12 small-uncolapse panel">

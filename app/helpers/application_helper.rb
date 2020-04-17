@@ -13,10 +13,12 @@ module ApplicationHelper
   def process_post(post)
     subs =
     [
-	["[img]", "<img src=\""],
+	["[img]", "<img src=\"../images/"],
 	["[/img]", "\" />"],
 	["[caption]", "<div class=\"caption\">"],
-	["[/caption]", "<\/div>"]
+	["[/caption]", "<\/div>"],
+	["[quote]", "<blockquote>"],
+	["[/quote]", "<\/blockquote>"]
     ]
 
     subs.each { |pair| post.gsub!(pair[0], pair[1]) }

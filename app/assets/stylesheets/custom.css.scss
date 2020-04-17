@@ -2,13 +2,15 @@
 
 .backdrop {
   background: #661515;
-  background: linear-gradient(#661515, #7E1515, #661515);
+  background: linear-gradient(#661515, #7E1515, #661514);
 }
 
 .panel-post {
   @extend .panel;
   background-color: white-smoke;
   color: #000000;
+  padding-left: 5px;
+  padding-right: 10px;
 }
 
 .panel-comment {

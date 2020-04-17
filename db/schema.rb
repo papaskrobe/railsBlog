@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170228074539) do
+ActiveRecord::Schema.define(version: 20170319084535) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
@@ -28,35 +28,35 @@ ActiveRecord::Schema.define(version: 20170228074539) do
 
   create_table "posts", force: :cascade do |t|
     t.string   "title"
-    t.string   "url"
+    t.string   "url",           limit: 100
     t.text     "content_final"
     t.datetime "posted"
     t.integer  "views"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.boolean  "guest_comment"
-    t.boolean  "comments_on",   default: true
+    t.boolean  "comments_on",               default: true
   end
 
   add_index "posts", ["posted"], name: "index_posts_on_posted"
   add_index "posts", ["url"], name: "index_posts_on_url"
 
   create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
+    t.string   "name",             limit: 30
+    t.string   "email",            limit: 100
     t.string   "password_digest"
-    t.integer  "posts",            default: 0
-    t.integer  "karma",            default: 0
+    t.integer  "posts",                        default: 0
+    t.integer  "karma",                        default: 0
     t.datetime "last_karma"
     t.text     "signature"
-    t.boolean  "status_commentor", default: true
-    t.boolean  "status_moderator", default: false
-    t.boolean  "status_writer",    default: false
-    t.boolean  "status_admin",     default: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.boolean  "status_commentor",             default: true
+    t.boolean  "status_moderator",             default: false
+    t.boolean  "status_writer",                default: false
+    t.boolean  "status_admin",                 default: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.string   "remember_digest"
-    t.integer  "time_zone",        default: 0
+    t.integer  "time_zone",                    default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

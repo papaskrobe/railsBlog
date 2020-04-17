@@ -82,7 +82,7 @@ GEM
     mysql (2.9.1)
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
-    puma (3.8.2)
+    puma (3.12.4)
     quill-rails (0.1.4)
       railties (>= 3.1.0, < 5.0)
     rack (1.6.5)

@@ -49,7 +49,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.0.5)
+    concurrent-ruby (1.1.6)
     debug_inspector (0.0.2)
     erubis (2.7.0)
     execjs (2.7.0)
@@ -85,7 +85,7 @@ GEM
     puma (3.8.2)
     quill-rails (0.1.4)
       railties (>= 3.1.0, < 5.0)
-    rack (1.6.5)
+    rack (1.6.13)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.2)
@@ -128,7 +128,7 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     spring (1.6.1)
-    sprockets (3.7.1)
+    sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     sprockets-rails (3.2.0)
